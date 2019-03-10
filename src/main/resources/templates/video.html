@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ZH-CN">
 <head>
@@ -40,11 +41,7 @@
     let streaming = false; // 是否开始捕获媒体
 
     // 获取用户媒体,包含视频和音频
-    navigator.mediaDevices.getUserMedia(
-        {
-            video: true,
-            audio: flase  // 关闭声音
-        })
+    navigator.mediaDevices.getUserMedia({video: true, audio: true})
         .then(stream => {
         video.srcObject = stream; // 将捕获的视频流传递给video  放弃window.URL.createObjectURL(stream)的使用
     video.play(); //  播放视频
@@ -59,13 +56,16 @@
             context.drawImage(video, 0, 0, 350, 200);// 将视频画面捕捉后绘制到canvas里面
             img.src = canvas.toDataURL('image/png');// 将canvas的数据传送到img里
         }
+
     }
+
     btn.addEventListener('click',tackcapture,false); // 按钮点击事件
 
     // 监听视频流就位事件,即视频可以播放了
     video.addEventListener('canplay', function(ev){
         if (!streaming) {
             height = video.videoHeight / (video.videoWidth/width);
+
             video.setAttribute('width', width);
             video.setAttribute('height', height);
             canvas.setAttribute('width', width);
